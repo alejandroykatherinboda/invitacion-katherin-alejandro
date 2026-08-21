@@ -1,0 +1,23 @@
+:root{
+
+--color-principal:#6f8872;
+
+--color-secundario:#ffffff;
+
+--color-texto:#4e6653;
+
+--color-gris:#888;
+
+--color-fondo:#ffffff;
+
+--fuente-titulo:'Great Vibes',cursive;
+
+--fuente-texto:'Poppins',sans-serif;
+
+--radio:60px;
+
+--sombra:0px 15px 35px rgba(0,0,0,.18);
+
+--transicion:.45s;
+
+}

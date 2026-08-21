@@ -1,0 +1,17 @@
+.fade{
+
+opacity:0;
+
+transform:translateY(80px);
+
+transition:1.2s;
+
+}
+
+.fade.visible{
+
+opacity:1;
+
+transform:translateY(0);
+
+}

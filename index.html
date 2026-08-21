@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!-- =========================================
+         CONFIGURACIÓN
+    ========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Alejandro & Katherin | Nuestra Boda
+    </title>
+
+    <meta
+        name="description"
+        content="Invitación Digital de Alejandro & Katherin">
+
+    <meta
+        name="theme-color"
+        content="#6f8872">
+
+
+    <!-- =========================================
+         BOOTSTRAP
+    ========================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <!-- =========================================
+         FONT AWESOME
+    ========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <!-- =========================================
+         AOS
+    ========================================== -->
+
+    <link
+        href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+        rel="stylesheet">
+
+
+    <!-- =========================================
+         SWIPER
+    ========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+
+    <!-- =========================================
+         GOOGLE FONTS
+    ========================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =========================================
+         CSS PRINCIPAL
+    ========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+
+    <!-- =========================================
+         CSS ADICIONALES
+    ========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/variables.css">
+
+    <link
+        rel="stylesheet"
+        href="css/animations.css">
+
+    <link
+        rel="stylesheet"
+        href="css/responsive.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         LOADER
+    ========================================== -->
+
+    <div id="loader">
+
+        <div class="loader-content">
+
+            <div class="loader-logo">
+
+                A
+                <span>♥</span>
+                K
+
+            </div>
+
+            <h2>
+                Alejandro & Katherin
+            </h2>
+
+            <div class="loader-bar">
+
+                <div class="loader-progress"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<!-- =================================================
+     MÚSICA DE LA INVITACIÓN
+================================================= -->
+<!-- =================================================
+     MÚSICA
+================================================= -->
+
+<audio id="musica" loop preload="auto">
+    <source src="assets/audio/PactoDios.mp3" type="audio/mpeg">
+</audio>
+
+<button
+    id="musicButton"
+    type="button"
+    aria-label="Reproducir música">
+
+    <i class="fa-solid fa-music"></i>
+
+</button>
+    <!-- =========================================
+         PANTALLA DE BIENVENIDA
+    ========================================== -->
+
+    <section id="welcome">
+
+        <div class="blur"></div>
+
+
+        <div class="cardWelcome">
+
+
+            <div class="welcome-flower">
+
+                <i class="fa-solid fa-heart"></i>
+
+            </div>
+
+
+            <!-- NOMBRES -->
+
+            <h1 class="tituloNovios">
+
+                Alejandro
+
+                <span>&</span>
+
+                Katherin
+
+            </h1>
+
+
+            <!-- INVITADO -->
+
+            <h3 id="nombreInvitado">
+
+                Invitado Especial
+
+            </h3>
+
+
+            <!-- CANTIDAD -->
+
+            <p class="pases">
+
+                Pase para
+
+                <strong id="cantidadInvitados">
+
+                    2 Personas
+
+                </strong>
+
+            </p>
+
+
+            <!-- TEXTO -->
+
+            <p class="textoSobre">
+
+                Para abrir la invitación
+                haz clic en el sobre
+
+            </p>
+
+
+            <!-- SOBRE -->
+
+            <div class="sobre-container">
+
+                <img
+                    src="assets/img/sobre.png"
+                    id="sobre"
+                    alt="Sobre de invitación">
+
+            </div>
+
+
+            <!-- SONIDO -->
+
+            <div class="sonido">
+
+                <i class="fa-solid fa-volume-high"></i>
+
+                Activa el sonido de tu dispositivo
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         PORTADA PRINCIPAL
+    ========================================== -->
+
+    <section
+        class="hero"
+        id="hero">
+
+
+        <!-- FOTO DE PORTADA -->
+
+        <img
+            src="assets/img/portada.jpg"
+            class="hero-image"
+            alt="Alejandro y Katherin">
+
+
+        <!-- OSCURECIMIENTO -->
+
+        <div class="hero-overlay"></div>
+
+
+        <!-- DECORACIÓN SUPERIOR -->
+
+        <img
+            src="assets/img/flor-superior.png"
+            class="flor-superior"
+            alt="">
+
+
+        <!-- DECORACIÓN INFERIOR -->
+
+        <img
+            src="assets/img/flor-inferior.png"
+            class="flor-inferior"
+            alt="">
+
+
+        <!-- CONTENIDO -->
+
+        <div
+            class="hero-content"
+            data-aos="zoom-in">
+
+
+            <!-- MONOGRAMA -->
+
+            <div class="monograma">
+
+                <span>A</span>
+
+                <i class="fa-solid fa-heart"></i>
+
+                <span>K</span>
+
+            </div>
+
+
+            <!-- SUBTÍTULO -->
+
+            <p class="hero-subtitulo">
+
+                NOS CASAMOS
+
+            </p>
+
+
+            <!-- NOMBRES -->
+
+            <h1 class="hero-nombres">
+
+                Alejandro
+
+                <span>&</span>
+
+                Katherin
+
+            </h1>
+
+
+            <!-- LÍNEA -->
+
+            <div class="hero-linea"></div>
+
+
+            <!-- FECHA -->
+
+            <p class="hero-fecha">
+
+                28 · NOVIEMBRE · 2026
+
+            </p>
+
+
+            <!-- BOTÓN -->
+
+            <button
+                id="abrir"
+                class="btn-principal"
+                type="button">
+
+                <i class="fa-solid fa-heart"></i>
+
+                Ver Invitación
+
+            </button>
+
+
+        </div>
+
+
+        <!-- INDICADOR -->
+
+        <a
+            href="#contador"
+            class="scroll-indicator"
+            aria-label="Continuar">
+
+            <span>
+                Desliza
+            </span>
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </a>
+
+
+    </section>
+
+
+    <!-- =========================================
+         CUENTA REGRESIVA
+    ========================================== -->
+
+    <section
+        class="contador-section"
+        id="contador">
+
+
+        <div class="container">
+
+
+            <div
+                class="section-heading"
+                data-aos="fade-up">
+
+
+                <span class="section-small">
+
+                    NUESTRO GRAN DÍA
+
+                </span>
+
+
+                <h2>
+
+                    Solo faltan
+
+                </h2>
+
+
+                <div class="decoracion-linea">
+
+                    <span></span>
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    <span></span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CONTADOR -->
+
+            <div
+                class="countdown-grid"
+                data-aos="zoom-in">
+
+
+                <div class="countdown-box">
+
+                    <strong id="dias">
+                        00
+                    </strong>
+
+                    <span>
+                        Días
+                    </span>
+
+                </div>
+
+
+                <div class="countdown-box">
+
+                    <strong id="horas">
+                        00
+                    </strong>
+
+                    <span>
+                        Horas
+                    </span>
+
+                </div>
+
+
+                <div class="countdown-box">
+
+                    <strong id="minutos">
+                        00
+                    </strong>
+
+                    <span>
+                        Minutos
+                    </span>
+
+                </div>
+
+
+                <div class="countdown-box">
+
+                    <strong id="segundos">
+                        00
+                    </strong>
+
+                    <span>
+                        Segundos
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CALENDARIO -->
+
+            <div
+                class="calendar-area"
+                data-aos="fade-up">
+
+
+                <p>
+
+                    Reserva esta fecha
+                    para celebrar con nosotros.
+
+                </p>
+
+
+                <a
+                    href="#"
+                    id="btnCalendario"
+                    class="btn-secundario">
+
+                    <i class="fa-regular fa-calendar-plus"></i>
+
+                    Agregar al calendario
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         NUESTRA HISTORIA
+    ========================================== -->
+
+    <section
+        class="historia efecto-suave">
+
+
+        <div class="container">
+
+
+            <div class="row align-items-center">
+
+
+                <!-- IMAGEN -->
+
+                <div
+                    class="col-lg-6"
+                    data-aos="fade-right">
+
+
+                    <img
+                        src="assets/img/historia.jpg"
+                        class="img-fluid historia-img"
+                        alt="Nuestra historia">
+
+
+                </div>
+
+
+                <!-- TEXTO -->
+
+                <div
+                    class="col-lg-6"
+                    data-aos="fade-left">
+
+
+                    <span class="titulo-pequeno">
+
+                        NUESTRA HISTORIA
+
+                    </span>
+
+
+                    <h2>
+
+                        En este día elegimos
+                        seguir caminando juntos
+
+                    </h2>
+
+
+                    <p>
+
+                        Transformando cada instante
+                        en un recuerdo inolvidable
+                        y cada paso en una nueva
+                        oportunidad para amarnos.
+
+                    </p>
+
+
+                    <p>
+
+                        Hay amores que marcan la vida,
+                        y el nuestro decidió quedarse
+                        para siempre.
+
+                    </p>
+
+
+                    <p>
+
+                        Con la bendición de Dios
+                        y nuestros padres.
+
+                    </p>
+
+
+                    <p>
+
+                        Hoy queremos celebrar este
+                        hermoso capítulo rodeados
+                        de las personas que más queremos.
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         PADRES DEL NOVIO
+         PRIMERO
+    ========================================== -->
+
+    <section
+        class="padres efecto-suave">
+
+
+        <div class="container">
+
+
+            <div
+                class="titulo-seccion"
+                data-aos="fade-up">
+
+
+                <span>
+
+                    CON LA BENDICIÓN DE DIOS
+
+                </span>
+
+
+                <h2>
+
+                    Padres del Novio
+
+                </h2>
+
+
+            </div>
+
+
+            <div
+                class="row justify-content-center">
+
+
+                <!-- PADRE -->
+
+                <div
+                    class="col-md-6 col-lg-5 mb-4"
+                    data-aos="fade-up">
+
+
+                    <div class="card-padres">
+
+
+                        <i class="fa-solid fa-heart"></i>
+
+
+                        <h3>
+
+                            Padre del Novio
+
+                        </h3>
+
+
+                        <p>
+
+                            Cardenio Bran Vallecillo
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- MADRE -->
+
+                <div
+                    class="col-md-6 col-lg-5 mb-4"
+                    data-aos="fade-up"
+                    data-aos-delay="100">
+
+
+                    <div class="card-padres">
+
+
+                        <i class="fa-solid fa-heart"></i>
+
+
+                        <h3>
+
+                            Madre del Novio
+
+                        </h3>
+
+
+                        <p>
+
+                            Maria Zeron
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         PADRES DE LA NOVIA
+         SEGUNDO
+    ========================================== -->
+
+    <section
+        class="padres efecto-suave">
+
+
+        <div class="container">
+
+
+            <div
+                class="titulo-seccion"
+                data-aos="fade-up">
+
+
+                <span>
+
+                    CON MUCHO AMOR
+
+                </span>
+
+
+                <h2>
+
+                    Padres de la Novia
+
+                </h2>
+
+
+            </div>
+
+
+            <div
+                class="row justify-content-center">
+
+
+                <!-- PADRE -->
+
+                <div
+                    class="col-md-6 col-lg-5 mb-4"
+                    data-aos="fade-up">
+
+
+                    <div class="card-padres">
+
+
+                        <i class="fa-solid fa-heart"></i>
+
+
+                        <h3>
+
+                            Padre de la Novia
+
+                        </h3>
+
+
+                        <p>
+
+                            Oscar García Zavala
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- MADRE -->
+
+                <div
+                    class="col-md-6 col-lg-5 mb-4"
+                    data-aos="fade-up"
+                    data-aos-delay="100">
+
+
+                    <div class="card-padres">
+
+
+                        <i class="fa-solid fa-heart"></i>
+
+
+                        <h3>
+
+                            Madre de la Novia
+
+                        </h3>
+
+
+                        <p>
+
+                            María Luz García Rivas
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         CEREMONIA Y UBICACIÓN
+         ÚNICA UBICACIÓN
+    ========================================== -->
+
+    <section
+        class="evento efecto-suave">
+
+
+        <div class="container">
+
+
+            <div
+                class="titulo-seccion"
+                data-aos="fade-up">
+
+
+                <span>
+
+                    NUESTRO GRAN DÍA
+
+                </span>
+
+
+                <h2>
+
+                    Ceremonia
+
+                </h2>
+
+
+            </div>
+
+
+            <div
+                class="card-evento"
+                data-aos="zoom-in">
+
+
+                <i
+                    class="fa-solid fa-church icono-evento">
+                </i>
+
+
+                <h3>
+
+                    Parroquia Nuestra Señora
+                    de la Candelaria
+
+                </h3>
+
+
+                <p>
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                    28 Noviembre 2026
+
+                </p>
+
+
+                <p>
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    6:00 PM
+
+                </p>
+
+
+                <p>
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    Barrio Abajo,
+                    Jacaleapa,
+                    El Paraíso
+
+                </p>
+
+
+                <!-- MAPA -->
+
+                <div class="mapa-wrap">
+
+
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3871.0110095509262!2d-86.66696942513892!3d14.017361486402745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f6e447711835f39%3A0x7829889812057dad!2sIglesia%20Cat%C3%B3lica%20Mar%C3%ADa%20de%20la%20Candelaria!5e0!3m2!1ses-419!2shn!4v1786075343194!5m2!1ses-419!2shn"
+                        width="600"
+                        height="450"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        title="Ubicación de la ceremonia">
+                    </iframe>
+
+
+                </div>
+
+
+                <!-- BOTÓN -->
+
+                <a
+                    href="https://maps.app.goo.gl/6kFuCN8SqSCkSEPb6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-principal">
+
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    Ver ubicación
+
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         CÓDIGO DE VESTIMENTA
+    ========================================== -->
+
+    <section
+        class="dresscode efecto-suave">
+
+
+        <div class="container"
+             data-aos="fade-up">
+
+
+            <div class="titulo-seccion">
+
+
+                <span>
+
+                    PARA NUESTRO GRAN DÍA
+
+                </span>
+
+
+                <h2>
+
+                    Código de Vestimenta
+
+                </h2>
+
+
+            </div>
+
+
+            <i
+                class="fa-solid fa-user-tie traje">
+            </i>
+
+
+            <h3>
+
+                Elegante
+
+            </h3>
+
+
+            <p>
+
+                Agradecemos vestir de manera
+                elegante. El color blanco está
+                reservado para la novia.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         GALERÍA
+    ========================================== -->
+
+    <section
+        class="galeria efecto-suave">
+
+
+        <div class="container">
+
+
+            <div
+                class="titulo-seccion"
+                data-aos="fade-up">
+
+
+                <span>
+
+                    MOMENTOS ESPECIALES
+
+                </span>
+
+
+                <h2>
+
+                    Nuestra Galería
+
+                </h2>
+
+
+            </div>
+
+
+            <div
+                class="swiper mySwiper"
+                data-aos="zoom-in">
+
+
+                <div class="swiper-wrapper">
+
+
+                    <div class="swiper-slide">
+
+                        <img
+                            src="assets/img/galeria1.jpg"
+                            alt="Fotografía de Alejandro y Katherin">
+
+                    </div>
+
+
+                    <div class="swiper-slide">
+
+                        <img
+                            src="assets/img/galeria2.jpg"
+                            alt="Fotografía de Alejandro y Katherin">
+
+                    </div>
+
+
+                    <div class="swiper-slide">
+
+                        <img
+                            src="assets/img/galeria3.jpg"
+                            alt="Fotografía de Alejandro y Katherin">
+
+                    </div>
+
+
+                    <div class="swiper-slide">
+
+                        <img
+                            src="assets/img/galeria4.jpg"
+                            alt="Fotografía de Alejandro y Katherin">
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="swiper-pagination"></div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         MESA DE REGALOS
+    ========================================== -->
+
+    <section
+        class="regalos efecto-suave">
+
+
+        <div class="container">
+
+
+            <div
+                class="titulo-seccion"
+                data-aos="fade-up">
+
+
+                <span>
+
+                    CON CARIÑO
+
+                </span>
+
+
+                <h2>
+
+                    Mesa de Regalos
+
+                </h2>
+
+
+            </div>
+
+
+            <div
+                class="regalo-card"
+                data-aos="zoom-in">
+
+
+                <i
+                    class="fa-solid fa-gift regalo-icono">
+                </i>
+
+
+                <p>
+
+                    Su presencia es nuestro
+                    mejor regalo.
+
+
+                </p>
+
+
+                <p>
+
+                    Si deseas hacernos un obsequio,
+                    puedes hacerlo mediante
+                    transferencia bancaria o efectivo.
+                    Será recibido con mucho aprecio.
+
+                </p>
+
+
+                <h4>
+
+                    Banco Atlántida
+
+                </h4>
+
+
+                <p>
+
+                    Cuenta de Ahorro
+
+                </p>
+
+
+                <strong>
+
+                    0000-0000-000000
+
+                </strong>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         SEPARADOR
+    ========================================== -->
+
+    <div class="separador">
+
+        <img
+            src="assets/img/flor-separador.png"
+            alt="Decoración floral">
+
+    </div>
+
+
+    <!-- =========================================
+         PROGRAMA
+    ========================================== -->
+
+    <section
+        class="timeline efecto-suave">
+
+
+        <div class="container">
+
+
+            <div
+                class="titulo-seccion"
+                data-aos="fade-up">
+
+
+                <span>
+
+                    ACOMPAÑANOS
+
+                </span>
+
+
+                <h2>
+
+                    Programa
+
+                </h2>
+
+
+            </div>
+
+
+            <!-- CEREMONIA -->
+
+            <div
+                class="timeline-item"
+                data-aos="fade-up">
+
+
+                <div>
+
+                    <strong>
+
+                        6:00 PM
+
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    Ceremonia Religiosa
+
+                </div>
+
+
+            </div>
+
+
+            <!-- RECEPCIÓN -->
+
+            <div
+                class="timeline-item"
+                data-aos="fade-up">
+
+
+                <div>
+
+                    <strong>
+
+                        7:30 PM
+
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    Recepción
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CENA -->
+
+            <div
+                class="timeline-item"
+                data-aos="fade-up">
+
+
+                <div>
+
+                    <strong>
+
+                        8:00 PM
+
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    Cena
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BAILE -->
+
+            <div
+                class="timeline-item"
+                data-aos="fade-up">
+
+
+                <div>
+
+                    <strong>
+
+                        9:00 PM
+
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    Baile
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         SEPARADOR
+    ========================================== -->
+
+    <div class="separador">
+
+        <img
+            src="assets/img/flor-separador.png"
+            alt="Decoración floral">
+
+    </div>
+
+
+    <!-- =========================================
+         CONFIRMACIÓN
+    ========================================== -->
+
+    <section
+        class="confirmacion efecto-suave">
+
+
+        <div class="container">
+
+
+            <div
+                class="titulo-seccion"
+                data-aos="fade-up">
+
+
+                <span>
+
+                    ESPERAMOS CONTAR CONTIGO
+
+                </span>
+
+
+                <h2>
+
+                    Confirma tu asistencia
+
+                </h2>
+
+
+            </div>
+
+
+            <form
+                id="formWhatsapp"
+                data-aos="fade-up">
+
+
+                <div class="row">
+
+
+                    <!-- NOMBRE -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Nombre Completo"
+                            required>
+
+                    </div>
+
+
+                    <!-- ASISTENCIA -->
+
+                    <div class="col-md-6 mb-3">
+
+                        <select
+                            id="asistencia"
+                            required>
+
+
+                            <option value="Sí asistiré">
+
+                                Sí asistiré
+
+                            </option>
+
+
+                            <option value="No podré asistir">
+
+                                No podré asistir
+
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- MENSAJE -->
+
+                <textarea
+                    id="mensaje"
+                    rows="5"
+                    placeholder="Mensaje (opcional)">
+                </textarea>
+
+
+                <div class="text-center mt-4">
+
+
+                    <button
+                        class="btn-principal"
+                        type="submit">
+
+
+                        <i
+                            class="fa-brands fa-whatsapp">
+                        </i>
+
+
+                        Confirmar asistencia
+
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         FRASE
+    ========================================== -->
+
+    <section class="frase">
+
+
+        <div class="container">
+
+
+            <h2>
+
+                El amor no consiste en
+                mirarse el uno al otro,
+                sino en mirar juntos
+                en la misma dirección.
+
+            </h2>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         INSTAGRAM
+    ========================================== -->
+
+    <section
+        class="instagram efecto-suave">
+
+
+        <div class="container">
+
+
+            <div class="titulo-seccion">
+
+
+                <span>
+
+                    COMPARTE TU EXPERIENCIA
+
+                </span>
+
+
+                <h2>
+
+                    #AlejandroYKatherin
+
+                </h2>
+
+
+            </div>
+
+
+            <p>
+
+                Etiqueta tus fotografías
+                usando nuestro hashtag.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+
+        <div class="container">
+
+
+            <h2>
+
+                Alejandro
+
+                <span>&</span>
+
+                Katherin
+
+            </h2>
+
+
+            <p>
+
+                28 Noviembre 2026
+
+            </p>
+
+
+            <p>
+
+                Gracias por acompañarnos
+                en este momento tan especial.
+
+            </p>
+
+
+        </div>
+
+
+    </footer>
+
+
+    <!-- =========================================
+         WHATSAPP
+    ========================================== -->
+
+    <a
+        href="https://wa.me/50493344486"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="whatsapp-float"
+        aria-label="Contactar por WhatsApp">
+
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+
+    </a>
+
+
+    <!-- =========================================
+         BOTÓN VOLVER ARRIBA
+    ========================================== -->
+
+    <a
+        href="#"
+        id="toTop"
+        aria-label="Volver arriba">
+
+
+        <i class="fa-solid fa-arrow-up"></i>
+
+
+    </a>
+
+
+    <!-- =========================================
+         PÉTALOS
+    ========================================== -->
+
+    <div id="petalos"></div>
+
+
+    <!-- =========================================
+         JAVASCRIPT EXTERNO
+    ========================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js">
+    </script>
+
+
+    <script
+        src="https://unpkg.com/aos@2.3.4/dist/aos.js">
+    </script>
+
+
+    <!-- =========================================
+         TU SCRIPT PRINCIPAL
+    ========================================== -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
