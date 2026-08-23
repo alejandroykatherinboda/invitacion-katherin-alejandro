@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de enlaces - Alejandro & Katherin</title>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f5f5;color:#222;font-family:Arial,Helvetica,sans-serif}
+.wrap{width:min(1500px,94%);margin:35px auto}
+.card{background:#fff;border-radius:18px;padding:28px;box-shadow:0 10px 35px rgba(0,0,0,.08)}
+h1{margin:0 0 18px;font-size:34px}
+h2{font-size:20px;margin:25px 0 12px}
+.info{background:#fff7d9;border-left:5px solid #c8a96b;padding:14px 16px;border-radius:8px;line-height:1.5}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:18px}
+label{font-weight:700;display:block;margin-bottom:7px}
+input[type=text],input[type=search],input[type=file]{width:100%;padding:13px;border:1px solid #bbb;border-radius:9px;background:#fff}
+input[type=file]{padding:10px}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}
+button{border:0;border-radius:9px;padding:12px 17px;cursor:pointer;font-weight:700}
+.primary{background:#6f8872;color:#fff}.gold{background:#c8a96b;color:#fff}.dark{background:#333;color:#fff}.light{background:#eee;color:#333}.wa{background:#25D366;color:#fff}.danger{background:#b84a4a;color:#fff}
+.status{margin-top:15px;padding:12px;border-radius:9px;background:#eef6ef;display:none}
+.status.show{display:block}
+.table-wrap{overflow:auto;margin-top:20px}
+table{width:100%;border-collapse:collapse;min-width:950px}
+th,td{padding:12px 10px;border-bottom:1px solid #e5e5e5;text-align:left;vertical-align:middle}
+th{background:#f0f0f0}
+.url{font-size:12px;word-break:break-all;color:#555}
+.small{font-size:13px;color:#666}
+.badge{display:inline-block;padding:5px 9px;border-radius:20px;background:#f3efe7}
+.empty{text-align:center;padding:30px;color:#777}
+@media(max-width:800px){.grid{grid-template-columns:1fr}h1{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h1>Enlaces personalizados de invitados</h1>
+
+<div class="info">
+<strong>Importante:</strong> puedes importar nuevamente tu archivo Excel cada vez que cambies nombres o cantidades.
+El generador actualiza la tabla y te permite descargar el nuevo <code>invitados.json</code>.
+Después debes reemplazar <code>database/invitados.json</code> en GitHub Pages.
+</div>
+
+<h2>1. Dirección de tu invitación</h2>
+<label for="baseUrl">Dirección base</label>
+<input id="baseUrl" type="text" value="https://alejandroykatherinboda.github.io/invitacion-katherin-alejandro/">
+
+<h2>2. Importar / actualizar lista de Excel</h2>
+<input id="excelFile" type="file" accept=".xlsx,.xls">
+<div class="buttons">
+<button class="primary" id="importBtn">📥 Importar / actualizar Excel</button>
+<button class="gold" id="downloadJsonBtn">💾 Descargar invitados.json</button>
+<button class="dark" id="downloadCsvBtn">📄 Descargar enlaces CSV</button>
+<button class="light" id="clearBtn">Limpiar lista guardada</button>
+</div>
+<div id="status" class="status"></div>
+
+<h2>3. Lista de invitados</h2>
+<div class="grid">
+<div>
+<label for="search">Buscar invitado</label>
+<input id="search" type="search" placeholder="Escribe un nombre...">
+</div>
+<div>
+<label>Registros cargados</label>
+<div id="count" class="badge">0 invitados</div>
+</div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Invitado</th>
+<th>Pase</th>
+<th>Enlace</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody id="tbody">
+<tr><td colspan="5" class="empty">Importa tu archivo Excel para mostrar los invitados.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<script>
+const STORAGE_KEY = "lista_invitados_boda_v2";
+let invitados = [];
+
+const $ = id => document.getElementById(id);
+
+function mostrarStatus(msg, error=false){
+  const el=$("status");
+  el.textContent=msg;
+  el.style.background=error ? "#fdeaea" : "#eef6ef";
+  el.style.color=error ? "#8a2d2d" : "#285b35";
+  el.classList.add("show");
+}
+
+function normalizarClave(valor){
+  return String(valor ?? "")
+    .normalize("NFD").replace(/[\\u0300-\\u036f]/g,"")
+    .toLowerCase().trim();
+}
+
+function encontrarCampo(obj, posibles){
+  const claves=Object.keys(obj);
+  for(const p of posibles){
+    const n=normalizarClave(p);
+    const encontrada=claves.find(k=>normalizarClave(k)===n);
+    if(encontrada) return encontrada;
+  }
+  return null;
+}
+
+function convertirFilas(rows){
+  if(!rows.length) throw new Error("El Excel no contiene filas.");
+
+  const muestra=rows[0];
+  const campoNo=encontrarCampo(muestra,["No.","No","Numero","Número","ID"]);
+  const campoNombre=encontrarCampo(muestra,["Nombre","Invitado","Nombre del invitado"]);
+  const campoCantidad=encontrarCampo(muestra,["Cantidad","Personas","Pase","Cantidad de personas"]);
+
+  if(!campoNombre || !campoCantidad){
+    throw new Error("No encontré las columnas Nombre y Cantidad. Tu Excel debe tener: No., Nombre y Cantidad.");
+  }
+
+  return rows.map((r,i)=>{
+    const id=Number(r[campoNo]) || (i+1);
+    const nombre=String(r[campoNombre] ?? "").trim();
+    const personas=Number(r[campoCantidad]);
+
+    if(!nombre) return null;
+    return {
+      id:id,
+      nombre:nombre,
+      personas:Number.isFinite(personas) ? personas : 1
+    };
+  }).filter(Boolean);
+}
+
+function baseUrl(){
+  let url=$("baseUrl").value.trim();
+  if(!url) return "";
+  if(!/^https?:\\/\\//i.test(url)) url="https://"+url;
+  return url.replace(/\\/+$/,"")+"/";
+}
+
+function enlace(inv){
+  return baseUrl()+"?invitado="+encodeURIComponent(inv.id);
+}
+
+function render(){
+  const tbody=$("tbody");
+  const q=normalizarClave($("search").value);
+  const filtrados=invitados.filter(x=>normalizarClave(x.nombre).includes(q) || String(x.id)===q);
+
+  $("count").textContent=invitados.length+" invitado"+(invitados.length===1?"":"s");
+
+  if(!filtrados.length){
+    tbody.innerHTML='<tr><td colspan="5" class="empty">No hay resultados.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML=filtrados.map(inv=>{
+    const url=enlace(inv);
+    const pase=inv.personas===1 ? "1 Persona" : inv.personas+" Personas";
+    const mensaje="Hola, Alejandro y Katherin. 💍❤️\\n\\nTe compartimos tu invitación personalizada:\\n"+url+"\\n\\n¡Esperamos verte en nuestro gran día!";
+
+    return `<tr>
+      <td>${escapeHtml(inv.id)}</td>
+      <td><strong>${escapeHtml(inv.nombre)}</strong></td>
+      <td><span class="badge">${escapeHtml(pase)}</span></td>
+      <td><div class="url">${escapeHtml(url)}</div></td>
+      <td>
+        <div class="buttons" style="margin:0">
+          <button class="primary" onclick="copiar('${jsEscape(url)}')">📋 Copiar</button>
+          <button class="wa" onclick="whatsapp('${jsEscape(mensaje)}')">💬 WhatsApp</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join("");
+}
+
+function escapeHtml(v){
+  return String(v).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function jsEscape(v){
+  return String(v).replace(/\\\\/g,"\\\\\\\\").replace(/'/g,"\\\\'").replace(/\\n/g,"\\\\n").replace(/\\r/g,"");
+}
+
+async function copiar(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    mostrarStatus("Enlace copiado.");
+  }catch(e){
+    const ta=document.createElement("textarea");
+    ta.value=text; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); ta.remove();
+    mostrarStatus("Enlace copiado.");
+  }
+}
+
+function whatsapp(text){
+  window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank","noopener,noreferrer");
+}
+
+function descargar(nombre, contenido, tipo){
+  const blob=new Blob([contenido],{type:tipo});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=nombre;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+$("importBtn").addEventListener("click", async ()=>{
+  const file=$("excelFile").files[0];
+  if(!file){ mostrarStatus("Selecciona primero el archivo Excel.",true); return; }
+
+  try{
+    const data=await file.arrayBuffer();
+    const wb=XLSX.read(data,{type:"array"});
+    const sheet=wb.Sheets[wb.SheetNames[0]];
+    const rows=XLSX.utils.sheet_to_json(sheet,{defval:""});
+    invitados=convertirFilas(rows);
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(invitados));
+    render();
+    mostrarStatus("Excel importado correctamente: "+invitados.length+" invitados.");
+  }catch(err){
+    console.error(err);
+    mostrarStatus("Error al importar: "+err.message,true);
+  }
+});
+
+$("downloadJsonBtn").addEventListener("click",()=>{
+  if(!invitados.length){mostrarStatus("Primero importa el Excel.",true);return;}
+  descargar("invitados.json",JSON.stringify(invitados,null,2),"application/json;charset=utf-8");
+  mostrarStatus("Se descargó invitados.json. Súbelo a database/invitados.json en GitHub.");
+});
+
+$("downloadCsvBtn").addEventListener("click",()=>{
+  if(!invitados.length){mostrarStatus("Primero importa el Excel.",true);return;}
+  const rows=[["No.","Invitado","Pase","Enlace"]];
+  invitados.forEach(x=>rows.push([x.id,x.nombre,x.personas,enlace(x)]));
+  const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\\r\\n");
+  descargar("enlaces_invitados.csv","\\uFEFF"+csv,"text/csv;charset=utf-8");
+});
+
+$("clearBtn").addEventListener("click",()=>{
+  if(!confirm("¿Seguro que deseas borrar la lista guardada en este navegador?")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  invitados=[];
+  render();
+  mostrarStatus("Lista local eliminada.");
+});
+
+$("search").addEventListener("input",render);
+$("baseUrl").addEventListener("input",render);
+
+try{
+  const guardados=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+  if(Array.isArray(guardados) && guardados.length){
+    invitados=guardados;
+    render();
+    mostrarStatus("Se recuperó automáticamente la última lista importada.");
+  }
+}catch(e){}
+</script>
+</body>
+</html>
