@@ -216,7 +216,7 @@
   },
   {
     "id": 44,
-    "nombre": "CISTIAN ELVIR Y ESPOSA",
+    "nombre": "CRISTIAN ELVIR Y ESPOSA",
     "personas": 2
   },
   {
@@ -276,7 +276,7 @@
   },
   {
     "id": 56,
-    "nombre": "LOURDES ALVARADO",
+    "nombre": "JUAN VALLECILLO Y ESPOSA",
     "personas": 2
   },
   {
@@ -401,7 +401,7 @@
   },
   {
     "id": 81,
-    "nombre": "FREDAL ANTONIO PAZY ESPOSA",
+    "nombre": "FREDA ANTONIO PAZ Y ESPOSA",
     "personas": 2
   },
   {
@@ -471,7 +471,7 @@
   },
   {
     "id": 95,
-    "nombre": "ERWIN SALINAS Y ESPOSA",
+    "nombre": "HERWIN SALINAS Y ESPOSA",
     "personas": 2
   },
   {
@@ -631,7 +631,7 @@
   },
   {
     "id": 127,
-    "nombre": "MAURO VALLADARES Y ESPOSA",
+    "nombre": "MAURO ERNESTO VALLADARES Y ESPOSA",
     "personas": 2
   },
   {
@@ -686,12 +686,17 @@
   },
   {
     "id": 138,
-    "nombre": "NARBEL FUNEZ",
+    "nombre": "NORBEL FUNEZ",
     "personas": 3
   },
   {
     "id": 139,
     "nombre": "GERSON RODRIGUEZ Y ESPOSA",
     "personas": 2
+  },
+  {
+    "id": 140,
+    "nombre": "NICOLL PORTILLO",
+    "personas": 1
   }
 ]
