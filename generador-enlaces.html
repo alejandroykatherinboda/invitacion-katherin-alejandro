@@ -5,101 +5,1192 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Generador de Enlaces | Alejandro & Katherin</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
 <style>
-:root{--verde:#315442;--dorado:#aa8a4e;--fondo:#f5f2eb}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:var(--fondo);color:#333;line-height:1.45}
-.wrap{width:min(1200px,100%);margin:0 auto;padding:24px 16px}
-.card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 8px 30px #0001;margin-bottom:20px}
-h1{margin:0 0 8px;color:var(--verde);font-size:clamp(24px,4vw,34px)}
-h2{color:var(--verde)}
-p{overflow-wrap:anywhere}
-input[type=file],input[type=text]{width:100%;max-width:520px;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px;background:#fff}
-button{border:0;border-radius:10px;padding:11px 15px;margin:4px;cursor:pointer;background:var(--verde);color:white;font-size:14px;transition:.2s}
-button:hover{opacity:.9;transform:translateY(-1px)}
-button.alt{background:var(--dorado)}
-button.danger{background:#a33}
-.status{padding:12px;border-radius:10px;background:#eef7ef;margin:12px 0;overflow-wrap:anywhere}
-.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.search{margin:0 0 15px}
-.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
-table{width:100%;min-width:1050px;border-collapse:collapse;background:white}
-th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;vertical-align:top}
-th{background:var(--verde);color:white;position:sticky;top:0;z-index:1}
-td a{color:var(--verde);font-weight:600;overflow-wrap:anywhere}
-.msg{width:300px;min-width:260px;height:110px;resize:vertical;padding:8px;border:1px solid #ddd;border-radius:8px}
-.small-note{font-size:13px;color:#666}
-@media(max-width:768px){
- .wrap{padding:14px 10px}
- .card{padding:16px;border-radius:14px}
- .actions{display:grid;grid-template-columns:1fr 1fr}
- .actions button{width:100%;margin:0}
- .search{margin-bottom:12px}
- .status{font-size:14px}
+:root{
+  --verde:#315442;
+  --dorado:#aa8a4e;
+  --fondo:#f5f2eb;
 }
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  overflow-x:hidden;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:var(--fondo);
+  color:#333;
+  line-height:1.45;
+}
+
+.wrap{
+  width:min(1200px,100%);
+  margin:0 auto;
+  padding:24px 16px;
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 8px 30px #0001;
+  margin-bottom:20px;
+}
+
+h1{
+  margin:0 0 8px;
+  color:var(--verde);
+  font-size:clamp(24px,4vw,34px);
+}
+
+h2{
+  color:var(--verde);
+}
+
+p{
+  overflow-wrap:anywhere;
+}
+
+input[type=file],
+input[type=text]{
+  width:100%;
+  max-width:520px;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:15px;
+  background:#fff;
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 15px;
+  margin:4px;
+  cursor:pointer;
+  background:var(--verde);
+  color:white;
+  font-size:14px;
+  transition:.2s;
+}
+
+button:hover{
+  opacity:.9;
+  transform:translateY(-1px);
+}
+
+button.alt{
+  background:var(--dorado);
+}
+
+button.danger{
+  background:#a33;
+}
+
+.status{
+  padding:12px;
+  border-radius:10px;
+  background:#eef7ef;
+  margin:12px 0;
+  overflow-wrap:anywhere;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+
+.search{
+  margin:0 0 15px;
+}
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  border-radius:12px;
+}
+
+table{
+  width:100%;
+  min-width:1050px;
+  border-collapse:collapse;
+  background:white;
+}
+
+th,td{
+  padding:10px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  background:var(--verde);
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:1;
+}
+
+td a{
+  color:var(--verde);
+  font-weight:600;
+  overflow-wrap:anywhere;
+}
+
+.msg{
+  width:300px;
+  min-width:260px;
+  height:110px;
+  resize:vertical;
+  padding:8px;
+  border:1px solid #ddd;
+  border-radius:8px;
+}
+
+.small-note{
+  font-size:13px;
+  color:#666;
+}
+
+/* =========================================
+   TARJETAS PARA CELULAR
+========================================= */
+
+.cards-mobile{
+  display:none;
+}
+
+.invitado-card{
+  background:#fff;
+  border:1px solid #e6e1d8;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:14px;
+  box-shadow:0 5px 18px #00000010;
+}
+
+.invitado-numero{
+  font-size:12px;
+  color:#777;
+  margin-bottom:5px;
+}
+
+.invitado-nombre{
+  color:var(--verde);
+  font-size:19px;
+  font-weight:bold;
+  margin-bottom:12px;
+  overflow-wrap:anywhere;
+}
+
+.invitado-dato{
+  background:#f8f6f1;
+  border-radius:10px;
+  padding:10px 12px;
+  margin-bottom:10px;
+}
+
+.invitado-dato strong{
+  display:block;
+  color:#555;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  margin-bottom:3px;
+}
+
+.enlace-personalizado{
+  display:block;
+  color:var(--verde);
+  font-size:13px;
+  line-height:1.4;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+.mensaje-label{
+  font-size:13px;
+  font-weight:bold;
+  color:#555;
+  margin:12px 0 5px;
+}
+
+.msg-mobile{
+  width:100%;
+  min-height:150px;
+  resize:vertical;
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-family:Arial,sans-serif;
+  font-size:13px;
+  line-height:1.45;
+  background:#fafafa;
+}
+
+.botones-mobile{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
+}
+
+.botones-mobile button{
+  width:100%;
+  margin:0;
+  padding:12px 8px;
+}
+
+.btn-abrir{
+  background:var(--verde);
+}
+
+.btn-copiar{
+  background:#555;
+}
+
+.btn-whatsapp{
+  background:#aa8a4e;
+}
+
+.btn-copiar-mensaje{
+  background:#777;
+  grid-column:1 / -1;
+}
+
+
+/* =========================================
+   TABLET / CELULAR
+========================================= */
+
+@media(max-width:768px){
+
+  .wrap{
+    padding:14px 10px;
+  }
+
+  .card{
+    padding:16px;
+    border-radius:14px;
+  }
+
+  .actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .actions button{
+    width:100%;
+    margin:0;
+  }
+
+  .search{
+    margin-bottom:12px;
+  }
+
+  .status{
+    font-size:14px;
+  }
+
+  /* Ocultar tabla en móvil */
+  .table-wrap{
+    display:none;
+  }
+
+  /* Mostrar tarjetas */
+  .cards-mobile{
+    display:block;
+  }
+
+}
+
 @media(max-width:480px){
- .wrap{padding:10px 7px}
- .card{padding:13px}
- .actions{grid-template-columns:1fr}
- button{font-size:14px;padding:12px}
- input[type=file],input[type=text]{max-width:none}
- table{min-width:980px}
+
+  .wrap{
+    padding:10px 7px;
+  }
+
+  .card{
+    padding:13px;
+  }
+
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+  button{
+    font-size:14px;
+    padding:12px;
+  }
+
+  input[type=file],
+  input[type=text]{
+    max-width:none;
+  }
+
+  .invitado-card{
+    padding:14px;
+    border-radius:14px;
+  }
+
+  .invitado-nombre{
+    font-size:18px;
+  }
+
+  .botones-mobile{
+    grid-template-columns:1fr;
+  }
+
+  .btn-copiar-mensaje{
+    grid-column:auto;
+  }
+
 }
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
-<div class="card">
-<h1>💍 Generador de Enlaces — Alejandro & Katherin</h1>
-<p>Listado actual cargado: <strong>140 invitados</strong>.</p>
-<div class="status" id="estado">✅ Lista actual cargada y guardada en este generador.</div>
-<p><strong>Dirección base:</strong><br>https://alejandroykatherinboda.github.io/invitacion-katherin-alejandro/</p>
-<input id="excel" type="file" accept=".xlsx,.xls">
-<button onclick="importarExcel()">📥 Importar / actualizar Excel</button>
-<button onclick="descargarJSON()">💾 Descargar invitados.json</button>
-<button onclick="descargarXLSX()">📊 Descargar listado XLSX</button>
-<button onclick="guardar()">💾 Guardar lista</button>
-<button class="danger" onclick="limpiar()">🗑️ Limpiar lista guardada</button>
+
+  <div class="card">
+
+    <h1>💍 Generador de Enlaces — Alejandro & Katherin</h1>
+
+    <p>
+      Listado actual cargado:
+      <strong id="totalInvitados">140 invitados</strong>.
+    </p>
+
+    <div class="status" id="estado">
+      ✅ Lista actual cargada y guardada en este generador.
+    </div>
+
+    <p>
+      <strong>Dirección base:</strong><br>
+      https://alejandroykatherinboda.github.io/invitacion-katherin-alejandro/
+    </p>
+
+    <input id="excel" type="file" accept=".xlsx,.xls">
+
+    <button onclick="importarExcel()">
+      📥 Importar / actualizar Excel
+    </button>
+
+    <button onclick="descargarJSON()">
+      💾 Descargar invitados.json
+    </button>
+
+    <button onclick="descargarXLSX()">
+      📊 Descargar listado XLSX
+    </button>
+
+    <button onclick="guardar()">
+      💾 Guardar lista
+    </button>
+
+    <button class="danger" onclick="limpiar()">
+      🗑️ Limpiar lista guardada
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <input
+      id="buscar"
+      type="text"
+      placeholder="🔎 Buscar invitado..."
+      oninput="render()"
+    >
+
+    <!-- =====================================
+         VISTA COMPUTADORA
+    ====================================== -->
+
+    <div class="table-wrap" style="margin-top:15px">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>No.</th>
+            <th>Invitado</th>
+            <th>Cantidad</th>
+            <th>Enlace</th>
+            <th>Acciones</th>
+            <th>Mensaje WhatsApp</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="tabla"></tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- =====================================
+         VISTA CELULAR
+    ====================================== -->
+
+    <div
+      id="cardsMobile"
+      class="cards-mobile"
+      style="margin-top:15px"
+    ></div>
+
+  </div>
+
 </div>
-<div class="card">
-<input id="buscar" type="text" placeholder="🔎 Buscar invitado..." oninput="render()">
-<div class="table-wrap" style="margin-top:15px"><table><thead><tr>
-<th>No.</th><th>Invitado</th><th>Cantidad</th><th>Enlace</th><th>Acciones</th><th>Mensaje WhatsApp</th>
-</tr></thead><tbody id="tabla"></tbody></table></div>
-</div>
-</div>
+
+
 <script>
-const BASE="https://alejandroykatherinboda.github.io/invitacion-katherin-alejandro/";
-let invitados=[{"id": 1, "nombre": "MARIA Y JESUS", "personas": 0}, {"id": 2, "nombre": "ERIBAN VALLADARES Y ESPOSA", "personas": 2}, {"id": 3, "nombre": "NIDIA RODRÍGUEZ", "personas": 1}, {"id": 4, "nombre": "ADAN SEVILLA", "personas": 2}, {"id": 5, "nombre": "YADIRA SEVILLA", "personas": 1}, {"id": 6, "nombre": "RAFAEL ARGEÑAL Y ESPOSA", "personas": 2}, {"id": 7, "nombre": "JOSE LUIS ESPINOZA Y ESPOSA", "personas": 2}, {"id": 8, "nombre": "DELVER GARCIA", "personas": 1}, {"id": 9, "nombre": "ERICK CASTRO", "personas": 1}, {"id": 10, "nombre": "ISMARY ROSTRAN", "personas": 1}, {"id": 11, "nombre": "DAVID CASTRO", "personas": 1}, {"id": 12, "nombre": "MILARY CERRATO", "personas": 1}, {"id": 13, "nombre": "EDWIN GODOY Y ESPOSA", "personas": 2}, {"id": 14, "nombre": "CRISTOBAL ARTICA Y ESPOSA", "personas": 2}, {"id": 15, "nombre": "CRISTOBAL ARTICA Y ESPOSA", "personas": 2}, {"id": 16, "nombre": "ENA MORENO", "personas": 1}, {"id": 17, "nombre": "ROSA FRANCIS RODRÍGUEZ", "personas": 1}, {"id": 18, "nombre": "DIDIER MONCADA Y ESPOSA", "personas": 2}, {"id": 19, "nombre": "JORGE MARADIAGA", "personas": 1}, {"id": 20, "nombre": "JESSICA FLORES", "personas": 1}, {"id": 21, "nombre": "MARIA ANTONIA ALVARADO", "personas": 1}, {"id": 22, "nombre": "JOSÉ MARÍA RODRÍGUEZ Y ESPOSA", "personas": 2}, {"id": 23, "nombre": "WILMER GONZALEZ", "personas": 1}, {"id": 24, "nombre": "MAYRA ORTIZ", "personas": 1}, {"id": 25, "nombre": "NOÉ GONZALEZ", "personas": 1}, {"id": 26, "nombre": "MARCIO MORGA Y ESPOSA", "personas": 2}, {"id": 27, "nombre": "ELVER RODRIGUEZ Y ESPOSA", "personas": 2}, {"id": 28, "nombre": "EFRAIN VALLADARES Y ESPOSA", "personas": 2}, {"id": 29, "nombre": "PEDRO POZO Y FAMILIA", "personas": 3}, {"id": 30, "nombre": "ELVIS PINTO Y ESPOSA", "personas": 2}, {"id": 31, "nombre": "OSCAR Y FAMILIA", "personas": 3}, {"id": 32, "nombre": "NICOLLE GARCIA E HIJA", "personas": 2}, {"id": 33, "nombre": "LENAR LAGOS", "personas": 1}, {"id": 34, "nombre": "SUYAPA GARCÍA E HIJA", "personas": 2}, {"id": 35, "nombre": "ANGEL SAUCEDA Y FAMILIA", "personas": 3}, {"id": 36, "nombre": "JAIME ARIAS Y ESPOSA", "personas": 2}, {"id": 37, "nombre": "JAIME ARIAS", "personas": 1}, {"id": 38, "nombre": "TELMA GARCÍA", "personas": 1}, {"id": 39, "nombre": "LUIS ALVARADO Y FAMILIA", "personas": 4}, {"id": 40, "nombre": "TANIA SOSA", "personas": 1}, {"id": 41, "nombre": "IVAN GARCIA Y ESPOSA", "personas": 2}, {"id": 42, "nombre": "OLVIN ELVIR Y FAMILIA", "personas": 3}, {"id": 43, "nombre": "OLVIN ELVIR Y ESPOSA", "personas": 2}, {"id": 44, "nombre": "CRISTIAN ELVIR Y ESPOSA", "personas": 2}, {"id": 45, "nombre": "DENIS ARGUETA Y FAMILIA", "personas": 4}, {"id": 46, "nombre": "ADAN GARCÍA", "personas": 1}, {"id": 47, "nombre": "EDER GARCÍA Y ESPOSA", "personas": 2}, {"id": 48, "nombre": "ROSA CRUZ E HIJA", "personas": 2}, {"id": 49, "nombre": "LUIS GARCÍA Y FAMILIA", "personas": 4}, {"id": 50, "nombre": "MARVIN GARCÍA Y FAMILIA", "personas": 3}, {"id": 51, "nombre": "ROBERTO GARCÍA Y ESPOSA", "personas": 2}, {"id": 52, "nombre": "DELVER GARCÍA Y ESPOSA", "personas": 2}, {"id": 53, "nombre": "MAURO GARCÍA Y FAMILIA", "personas": 0}, {"id": 54, "nombre": "TESLA GARCÍA ZAVALA", "personas": 1}, {"id": 55, "nombre": "NELDA GARCÍA Y FAMILIA", "personas": 0}, {"id": 56, "nombre": "JUAN VALLECILLO Y ESPOSA", "personas": 2}, {"id": 57, "nombre": "LUIS ARTURO GARCÍA", "personas": 1}, {"id": 58, "nombre": "NILSON ARTICA Y FAMILIA", "personas": 5}, {"id": 59, "nombre": "DENIS ARTICA Y ESPOSA", "personas": 2}, {"id": 60, "nombre": "GERSON ARTICA Y FAMILIA", "personas": 6}, {"id": 61, "nombre": "OSCAR ARGUETA E HIJA", "personas": 2}, {"id": 62, "nombre": "ISAMAR GARCÍA E HIJA", "personas": 2}, {"id": 63, "nombre": "JEOVANY LAGUNA Y ESPOSA", "personas": 2}, {"id": 64, "nombre": "PETRONA DEL CARMEN MORAZAN", "personas": 1}, {"id": 65, "nombre": "FREDY ULICES PORTILLO", "personas": 1}, {"id": 66, "nombre": "EVER ORLANDO ALONZO Y ESPOSA", "personas": 2}, {"id": 67, "nombre": "ABRAN BANEGAS", "personas": 1}, {"id": 68, "nombre": "EVER REYES Y ESPOSA", "personas": 2}, {"id": 69, "nombre": "DAVID REYES Y ESPOSA", "personas": 2}, {"id": 70, "nombre": "CRECENCIO CONTRERAS Y ESPOSA", "personas": 2}, {"id": 71, "nombre": "ARTURO FLORES Y ESPOSA", "personas": 2}, {"id": 72, "nombre": "ERLIS BANEGAS Y ESPOSA", "personas": 2}, {"id": 73, "nombre": "YANETH MONCADA", "personas": 1}, {"id": 74, "nombre": "YADIRA CALDERON", "personas": 1}, {"id": 75, "nombre": "MILAGRO DURÓN E HIJA", "personas": 2}, {"id": 76, "nombre": "WILMER VALLECILLO Y ESPOSA", "personas": 2}, {"id": 77, "nombre": "CARLOS PORTILLO Y ESPOSA", "personas": 2}, {"id": 78, "nombre": "JUAN DIAZ Y ESPOSA", "personas": 2}, {"id": 79, "nombre": "ISABEL SANCHEZ E HIJA", "personas": 2}, {"id": 80, "nombre": "UBALDO FLORES", "personas": 1}, {"id": 81, "nombre": "FREDA ANTONIO PAZ Y ESPOSA", "personas": 2}, {"id": 82, "nombre": "LUIS ROBERTO PAZ Y FAMILIA", "personas": 4}, {"id": 83, "nombre": "ISRAEL DUARTE Y ESPOSA", "personas": 2}, {"id": 84, "nombre": "ISRAEL DUARTE DIAZ Y ESPOSA", "personas": 2}, {"id": 85, "nombre": "MARTHA VALLECILLO", "personas": 3}, {"id": 86, "nombre": "WILL OSORTO Y FAMILIA", "personas": 3}, {"id": 87, "nombre": "SAMUEL ZUNIGA Y FAMILIA", "personas": 3}, {"id": 88, "nombre": "CARMEN VALLECILLO", "personas": 2}, {"id": 89, "nombre": "RAMIRO SOSA", "personas": 2}, {"id": 90, "nombre": "CARLOS MARADIAGA", "personas": 3}, {"id": 91, "nombre": "KARLA MARADIAGA", "personas": 2}, {"id": 92, "nombre": "OLVIN MARADIAGA", "personas": 3}, {"id": 93, "nombre": "ROSALINA BRAN", "personas": 3}, {"id": 94, "nombre": "NESTOR RIVAS Y ESPOSA", "personas": 2}, {"id": 95, "nombre": "HERWIN SALINAS Y ESPOSA", "personas": 2}, {"id": 96, "nombre": "BAYRON RUIZ Y ESPOSA", "personas": 2}, {"id": 97, "nombre": "BAYRON ANDERO Y ESPOSA", "personas": 2}, {"id": 98, "nombre": "MAURICIO GARCÍA Y FAMILIA", "personas": 3}, {"id": 99, "nombre": "MARINA LARA", "personas": 1}, {"id": 100, "nombre": "FERNANDO CRUZ", "personas": 1}, {"id": 101, "nombre": "CESAR AMADOR Y ESPOSA", "personas": 2}, {"id": 102, "nombre": "VICTOR AVILA", "personas": 1}, {"id": 103, "nombre": "MANUEL HERNANDEZ", "personas": 1}, {"id": 104, "nombre": "CARLOS FORTIN", "personas": 1}, {"id": 105, "nombre": "JUAN AVILA Y ESPOSA", "personas": 2}, {"id": 106, "nombre": "LAZARO VALLADARES Y ESPOSA", "personas": 2}, {"id": 107, "nombre": "HECTOR IZAGUIRRE Y FAMILIA", "personas": 6}, {"id": 108, "nombre": "EDY LOPEZ Y FAMILIA", "personas": 3}, {"id": 109, "nombre": "CARDENIO BRAN", "personas": 3}, {"id": 110, "nombre": "DINA BRAN E HIJO", "personas": 2}, {"id": 111, "nombre": "BILL ROMERO Y ESPOSA", "personas": 2}, {"id": 112, "nombre": "EDWIN ZERÓN Y FAMILIA", "personas": 4}, {"id": 113, "nombre": "NURIA GONZALEZ", "personas": 2}, {"id": 114, "nombre": "ROMAN GOMEZ Y ESPOSA", "personas": 2}, {"id": 115, "nombre": "FLORINDA ROSTRAN", "personas": 2}, {"id": 116, "nombre": "CARLOS ROSTRAN", "personas": 1}, {"id": 117, "nombre": "RIGOBERTO VINDEL", "personas": 1}, {"id": 118, "nombre": "DANIEL HERNANDEZ Y FAMILIA", "personas": 3}, {"id": 119, "nombre": "JATNIEL ROSTRAN", "personas": 1}, {"id": 120, "nombre": "CRISTIAN FERNANDO GARCÍA", "personas": 2}, {"id": 121, "nombre": "ARÓN MARQUEZ", "personas": 2}, {"id": 122, "nombre": "MARIA JOSE MARADIAGA", "personas": 1}, {"id": 123, "nombre": "YOLANDA RIVAS", "personas": 2}, {"id": 124, "nombre": "NESTOR RIVAS", "personas": 2}, {"id": 125, "nombre": "ISABEL RIVAS", "personas": 1}, {"id": 126, "nombre": "ARNULFO VALLADARES Y FAMILIA", "personas": 5}, {"id": 127, "nombre": "MAURO ERNESTO VALLADARES Y ESPOSA", "personas": 2}, {"id": 128, "nombre": "MIRIAN GODOY", "personas": 1}, {"id": 129, "nombre": "PADRE JOSÉ LUIS MERCADO ESCOBAR", "personas": 3}, {"id": 130, "nombre": "NERY LUQUE Y ESPOSA", "personas": 1}, {"id": 131, "nombre": "MAURO MORAZAN", "personas": 3}, {"id": 132, "nombre": "MIGUEL ANGEL CHAVARRIA Y ESPOSA", "personas": 2}, {"id": 133, "nombre": "SAUL MENDOZA", "personas": 2}, {"id": 134, "nombre": "DAVID CONTRERAS", "personas": 2}, {"id": 135, "nombre": "SALVADOR TORRES", "personas": 2}, {"id": 136, "nombre": "GRISELDA AGUILAR", "personas": 1}, {"id": 137, "nombre": "SIRLEY SUAZO", "personas": 1}, {"id": 138, "nombre": "NORBEL FUNEZ", "personas": 3}, {"id": 139, "nombre": "GERSON RODRIGUEZ Y ESPOSA", "personas": 2}, {"id": 140, "nombre": "NICOLL PORTILLO", "personas": 1}];
+
+const BASE =
+"https://alejandroykatherinboda.github.io/invitacion-katherin-alejandro/";
+
+let invitados=[
+{"id":1,"nombre":"MARIA Y JESUS","personas":0},
+{"id":2,"nombre":"ERIBAN VALLADARES Y ESPOSA","personas":2},
+{"id":3,"nombre":"NIDIA RODRÍGUEZ","personas":1},
+{"id":4,"nombre":"ADAN SEVILLA","personas":2},
+{"id":5,"nombre":"YADIRA SEVILLA","personas":1},
+{"id":6,"nombre":"RAFAEL ARGEÑAL Y ESPOSA","personas":2},
+{"id":7,"nombre":"JOSE LUIS ESPINOZA Y ESPOSA","personas":2},
+{"id":8,"nombre":"DELVER GARCIA","personas":1},
+{"id":9,"nombre":"ERICK CASTRO","personas":1},
+{"id":10,"nombre":"ISMARY ROSTRAN","personas":1},
+{"id":11,"nombre":"DAVID CASTRO","personas":1},
+{"id":12,"nombre":"MILARY CERRATO","personas":1},
+{"id":13,"nombre":"EDWIN GODOY Y ESPOSA","personas":2},
+{"id":14,"nombre":"CRISTOBAL ARTICA Y ESPOSA","personas":2},
+{"id":15,"nombre":"CRISTOBAL ARTICA Y ESPOSA","personas":2},
+{"id":16,"nombre":"ENA MORENO","personas":1},
+{"id":17,"nombre":"ROSA FRANCIS RODRÍGUEZ","personas":1},
+{"id":18,"nombre":"DIDIER MONCADA Y ESPOSA","personas":2},
+{"id":19,"nombre":"JORGE MARADIAGA","personas":1},
+{"id":20,"nombre":"JESSICA FLORES","personas":1},
+{"id":21,"nombre":"MARIA ANTONIA ALVARADO","personas":1},
+{"id":22,"nombre":"JOSÉ MARÍA RODRÍGUEZ Y ESPOSA","personas":2},
+{"id":23,"nombre":"WILMER GONZALEZ","personas":1},
+{"id":24,"nombre":"MAYRA ORTIZ","personas":1},
+{"id":25,"nombre":"NOÉ GONZALEZ","personas":1},
+{"id":26,"nombre":"MARCIO MORGA Y ESPOSA","personas":2},
+{"id":27,"nombre":"ELVER RODRIGUEZ Y ESPOSA","personas":2},
+{"id":28,"nombre":"EFRAIN VALLADARES Y ESPOSA","personas":2},
+{"id":29,"nombre":"PEDRO POZO Y FAMILIA","personas":3},
+{"id":30,"nombre":"ELVIS PINTO Y ESPOSA","personas":2},
+{"id":31,"nombre":"OSCAR Y FAMILIA","personas":3},
+{"id":32,"nombre":"NICOLLE GARCIA E HIJA","personas":2},
+{"id":33,"nombre":"LENAR LAGOS","personas":1},
+{"id":34,"nombre":"SUYAPA GARCÍA E HIJA","personas":2},
+{"id":35,"nombre":"ANGEL SAUCEDA Y FAMILIA","personas":3},
+{"id":36,"nombre":"JAIME ARIAS Y ESPOSA","personas":2},
+{"id":37,"nombre":"JAIME ARIAS","personas":1},
+{"id":38,"nombre":"TELMA GARCÍA","personas":1},
+{"id":39,"nombre":"LUIS ALVARADO Y FAMILIA","personas":4},
+{"id":40,"nombre":"TANIA SOSA","personas":1},
+{"id":41,"nombre":"IVAN GARCIA Y ESPOSA","personas":2},
+{"id":42,"nombre":"OLVIN ELVIR Y FAMILIA","personas":3},
+{"id":43,"nombre":"OLVIN ELVIR Y ESPOSA","personas":2},
+{"id":44,"nombre":"CRISTIAN ELVIR Y ESPOSA","personas":2},
+{"id":45,"nombre":"DENIS ARGUETA Y FAMILIA","personas":4},
+{"id":46,"nombre":"ADAN GARCÍA","personas":1},
+{"id":47,"nombre":"EDER GARCÍA Y ESPOSA","personas":2},
+{"id":48,"nombre":"ROSA CRUZ E HIJA","personas":2},
+{"id":49,"nombre":"LUIS GARCÍA Y FAMILIA","personas":4},
+{"id":50,"nombre":"MARVIN GARCÍA Y FAMILIA","personas":3},
+{"id":51,"nombre":"ROBERTO GARCÍA Y ESPOSA","personas":2},
+{"id":52,"nombre":"DELVER GARCÍA Y ESPOSA","personas":2},
+{"id":53,"nombre":"MAURO GARCÍA Y FAMILIA","personas":0},
+{"id":54,"nombre":"TESLA GARCÍA ZAVALA","personas":1},
+{"id":55,"nombre":"NELDA GARCÍA Y FAMILIA","personas":0},
+{"id":56,"nombre":"JUAN VALLECILLO Y ESPOSA","personas":2},
+{"id":57,"nombre":"LUIS ARTURO GARCÍA","personas":1},
+{"id":58,"nombre":"NILSON ARTICA Y FAMILIA","personas":5},
+{"id":59,"nombre":"DENIS ARTICA Y ESPOSA","personas":2},
+{"id":60,"nombre":"GERSON ARTICA Y FAMILIA","personas":6},
+{"id":61,"nombre":"OSCAR ARGUETA E HIJA","personas":2},
+{"id":62,"nombre":"ISAMAR GARCÍA E HIJA","personas":2},
+{"id":63,"nombre":"JEOVANY LAGUNA Y ESPOSA","personas":2},
+{"id":64,"nombre":"PETRONA DEL CARMEN MORAZAN","personas":1},
+{"id":65,"nombre":"FREDY ULICES PORTILLO","personas":1},
+{"id":66,"nombre":"EVER ORLANDO ALONZO Y ESPOSA","personas":2},
+{"id":67,"nombre":"ABRAN BANEGAS","personas":1},
+{"id":68,"nombre":"EVER REYES Y ESPOSA","personas":2},
+{"id":69,"nombre":"DAVID REYES Y ESPOSA","personas":2},
+{"id":70,"nombre":"CRECENCIO CONTRERAS Y ESPOSA","personas":2},
+{"id":71,"nombre":"ARTURO FLORES Y ESPOSA","personas":2},
+{"id":72,"nombre":"ERLIS BANEGAS Y ESPOSA","personas":2},
+{"id":73,"nombre":"YANETH MONCADA","personas":1},
+{"id":74,"nombre":"YADIRA CALDERON","personas":1},
+{"id":75,"nombre":"MILAGRO DURÓN E HIJA","personas":2},
+{"id":76,"nombre":"WILMER VALLECILLO Y ESPOSA","personas":2},
+{"id":77,"nombre":"CARLOS PORTILLO Y ESPOSA","personas":2},
+{"id":78,"nombre":"JUAN DIAZ Y ESPOSA","personas":2},
+{"id":79,"nombre":"ISABEL SANCHEZ E HIJA","personas":2},
+{"id":80,"nombre":"UBALDO FLORES","personas":1},
+{"id":81,"nombre":"FREDA ANTONIO PAZ Y ESPOSA","personas":2},
+{"id":82,"nombre":"LUIS ROBERTO PAZ Y FAMILIA","personas":4},
+{"id":83,"nombre":"ISRAEL DUARTE Y ESPOSA","personas":2},
+{"id":84,"nombre":"ISRAEL DUARTE DIAZ Y ESPOSA","personas":2},
+{"id":85,"nombre":"MARTHA VALLECILLO","personas":3},
+{"id":86,"nombre":"WILL OSORTO Y FAMILIA","personas":3},
+{"id":87,"nombre":"SAMUEL ZUNIGA Y FAMILIA","personas":3},
+{"id":88,"nombre":"CARMEN VALLECILLO","personas":2},
+{"id":89,"nombre":"RAMIRO SOSA","personas":2},
+{"id":90,"nombre":"CARLOS MARADIAGA","personas":3},
+{"id":91,"nombre":"KARLA MARADIAGA","personas":2},
+{"id":92,"nombre":"OLVIN MARADIAGA","personas":3},
+{"id":93,"nombre":"ROSALINA BRAN","personas":3},
+{"id":94,"nombre":"NESTOR RIVAS Y ESPOSA","personas":2},
+{"id":95,"nombre":"HERWIN SALINAS Y ESPOSA","personas":2},
+{"id":96,"nombre":"BAYRON RUIZ Y ESPOSA","personas":2},
+{"id":97,"nombre":"BAYRON ANDERO Y ESPOSA","personas":2},
+{"id":98,"nombre":"MAURICIO GARCÍA Y FAMILIA","personas":3},
+{"id":99,"nombre":"MARINA LARA","personas":1},
+{"id":100,"nombre":"FERNANDO CRUZ","personas":1},
+{"id":101,"nombre":"CESAR AMADOR Y ESPOSA","personas":2},
+{"id":102,"nombre":"VICTOR AVILA","personas":1},
+{"id":103,"nombre":"MANUEL HERNANDEZ","personas":1},
+{"id":104,"nombre":"CARLOS FORTIN","personas":1},
+{"id":105,"nombre":"JUAN AVILA Y ESPOSA","personas":2},
+{"id":106,"nombre":"LAZARO VALLADARES Y ESPOSA","personas":2},
+{"id":107,"nombre":"HECTOR IZAGUIRRE Y FAMILIA","personas":6},
+{"id":108,"nombre":"EDY LOPEZ Y FAMILIA","personas":3},
+{"id":109,"nombre":"CARDENIO BRAN","personas":3},
+{"id":110,"nombre":"DINA BRAN E HIJO","personas":2},
+{"id":111,"nombre":"BILL ROMERO Y ESPOSA","personas":2},
+{"id":112,"nombre":"EDWIN ZERÓN Y FAMILIA","personas":4},
+{"id":113,"nombre":"NURIA GONZALEZ","personas":2},
+{"id":114,"nombre":"ROMAN GOMEZ Y ESPOSA","personas":2},
+{"id":115,"nombre":"FLORINDA ROSTRAN","personas":2},
+{"id":116,"nombre":"CARLOS ROSTRAN","personas":1},
+{"id":117,"nombre":"RIGOBERTO VINDEL","personas":1},
+{"id":118,"nombre":"DANIEL HERNANDEZ Y FAMILIA","personas":3},
+{"id":119,"nombre":"JATNIEL ROSTRAN","personas":1},
+{"id":120,"nombre":"CRISTIAN FERNANDO GARCÍA","personas":2},
+{"id":121,"nombre":"ARÓN MARQUEZ","personas":2},
+{"id":122,"nombre":"MARIA JOSE MARADIAGA","personas":1},
+{"id":123,"nombre":"YOLANDA RIVAS","personas":2},
+{"id":124,"nombre":"NESTOR RIVAS","personas":2},
+{"id":125,"nombre":"ISABEL RIVAS","personas":1},
+{"id":126,"nombre":"ARNULFO VALLADARES Y FAMILIA","personas":5},
+{"id":127,"nombre":"MAURO ERNESTO VALLADARES Y ESPOSA","personas":2},
+{"id":128,"nombre":"MIRIAN GODOY","personas":1},
+{"id":129,"nombre":"PADRE JOSÉ LUIS MERCADO ESCOBAR","personas":3},
+{"id":130,"nombre":"NERY LUQUE Y ESPOSA","personas":1},
+{"id":131,"nombre":"MAURO MORAZAN","personas":3},
+{"id":132,"nombre":"MIGUEL ANGEL CHAVARRIA Y ESPOSA","personas":2},
+{"id":133,"nombre":"SAUL MENDOZA","personas":2},
+{"id":134,"nombre":"DAVID CONTRERAS","personas":2},
+{"id":135,"nombre":"SALVADOR TORRES","personas":2},
+{"id":136,"nombre":"GRISELDA AGUILAR","personas":1},
+{"id":137,"nombre":"SIRLEY SUAZO","personas":1},
+{"id":138,"nombre":"NORBEL FUNEZ","personas":3},
+{"id":139,"nombre":"GERSON RODRIGUEZ Y ESPOSA","personas":2},
+{"id":140,"nombre":"NICOLL PORTILLO","personas":1}
+];
+
 const KEY="listaInvitadosAlejandroKatherin";
 
-function guardar(){localStorage.setItem(KEY,JSON.stringify(invitados));document.getElementById('estado').textContent='✅ Lista guardada en este navegador: '+invitados.length+' invitados.';}
-function cargarGuardada(){try{const x=localStorage.getItem(KEY);if(x){invitados=JSON.parse(x);document.getElementById('estado').textContent='✅ Lista guardada recuperada: '+invitados.length+' invitados.';}}catch(e){}}
-function url(i){return BASE+'?invitado='+encodeURIComponent(i.id)}
-function mensaje(i){let saludo='💍❤️ ¡Hola, '+i.nombre+'!\n\nCon mucho cariño, Alejandro y Katherin queremos compartir contigo nuestra invitación de boda. ❤️\n\n✨ Aquí tienes tu invitación personalizada:\n'+url(i)+'\n\nSerá un honor contar con tu presencia en este día tan especial. 🥂✨\n\n¡Te esperamos! ❤️'; return saludo;}
+
+function guardar(){
+
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(invitados)
+  );
+
+  document.getElementById('estado').textContent=
+    '✅ Lista guardada en este navegador: '+
+    invitados.length+
+    ' invitados.';
+
+}
+
+
+function cargarGuardada(){
+
+  try{
+
+    const x=localStorage.getItem(KEY);
+
+    if(x){
+
+      invitados=JSON.parse(x);
+
+      document.getElementById('estado').textContent=
+        '✅ Lista guardada recuperada: '+
+        invitados.length+
+        ' invitados.';
+
+    }
+
+  }catch(e){}
+
+}
+
+
+function actualizarTotal(){
+
+  document.getElementById('totalInvitados').textContent=
+    invitados.length+
+    (invitados.length===1?' invitado':' invitados');
+
+}
+
+
+function url(i){
+
+  return BASE+
+    '?invitado='+
+    encodeURIComponent(i.id);
+
+}
+
+
+function mensaje(i){
+
+  return '💍❤️ ¡Hola, '+i.nombre+'!\n\n'+
+  'Con mucho cariño, Alejandro y Katherin queremos compartir contigo nuestra invitación de boda. ❤️\n\n'+
+  '✨ Aquí tienes tu invitación personalizada:\n'+
+  url(i)+
+  '\n\n'+
+  'Será un honor contar con tu presencia en este día tan especial. 🥂✨\n\n'+
+  '¡Te esperamos! ❤️';
+
+}
+
+
+function paseTexto(i){
+
+  const cantidad=Number(i.personas)||0;
+
+  if(cantidad<=0){
+
+    return '0';
+
+  }
+
+  return cantidad===1
+    ?'1 Persona'
+    :cantidad+' Personas';
+
+}
+
+
 function render(){
- const q=document.getElementById('buscar').value.toLowerCase(); const tb=document.getElementById('tabla'); tb.innerHTML='';
- invitados.filter(i=>(i.nombre||'').toLowerCase().includes(q)||String(i.id).includes(q)).forEach(i=>{
-  const pase=Number(i.personas)>0?(Number(i.personas)==1?'1 Persona':i.personas+' Personas'):'';
-  const tr=document.createElement('tr');
-  tr.innerHTML='<td>'+i.id+'</td><td><strong>'+esc(i.nombre)+'</strong></td><td>'+i.personas+'</td><td><a href="'+url(i)+'" target="_blank">Abrir invitación</a></td><td><button onclick="copiar('+i.id+')">📋 Copiar</button><button class="alt" onclick="wa('+i.id+')">💬 WhatsApp</button></td><td><textarea class="msg" readonly>'+esc(pase?mensaje(i):mensaje(i))+'</textarea></td>';
-  tb.appendChild(tr);
- });
+
+  const q=
+    document
+    .getElementById('buscar')
+    .value
+    .toLowerCase()
+    .trim();
+
+  const lista=
+    invitados.filter(i=>
+      (i.nombre||'')
+      .toLowerCase()
+      .includes(q)
+      ||
+      String(i.id).includes(q)
+    );
+
+
+  /* ====================================
+     TABLA COMPUTADORA
+  ==================================== */
+
+  const tb=
+    document.getElementById('tabla');
+
+  tb.innerHTML='';
+
+
+  lista.forEach(i=>{
+
+    const tr=
+      document.createElement('tr');
+
+    tr.innerHTML=
+
+      '<td>'+
+        i.id+
+      '</td>'+
+
+      '<td>'+
+        '<strong>'+
+          esc(i.nombre)+
+        '</strong>'+
+      '</td>'+
+
+      '<td>'+
+        paseTexto(i)+
+      '</td>'+
+
+      '<td>'+
+        '<a href="'+
+          url(i)+
+          '" target="_blank">'+
+          'Abrir invitación'+
+        '</a>'+
+      '</td>'+
+
+      '<td>'+
+        '<button onclick="copiar('+i.id+')">'+
+          '📋 Copiar'+
+        '</button>'+
+
+        '<button class="alt" onclick="wa('+i.id+')">'+
+          '💬 WhatsApp'+
+        '</button>'+
+      '</td>'+
+
+      '<td>'+
+        '<textarea class="msg" readonly>'+
+          esc(mensaje(i))+
+        '</textarea>'+
+      '</td>';
+
+    tb.appendChild(tr);
+
+  });
+
+
+  /* ====================================
+     TARJETAS CELULAR
+  ==================================== */
+
+  const cards=
+    document.getElementById('cardsMobile');
+
+  cards.innerHTML='';
+
+
+  if(lista.length===0){
+
+    cards.innerHTML=
+      '<div class="invitado-card">'+
+        '<div class="invitado-nombre">'+
+          '🔎 No se encontraron invitados'+
+        '</div>'+
+        '<div class="small-note">'+
+          'Prueba con otro nombre o número.'+
+        '</div>'+
+      '</div>';
+
+    actualizarTotal();
+
+    return;
+
+  }
+
+
+  lista.forEach(i=>{
+
+    const card=
+      document.createElement('div');
+
+    card.className='invitado-card';
+
+    card.innerHTML=
+
+      '<div class="invitado-numero">'+
+        'INVITADO #'+
+        i.id+
+      '</div>'+
+
+      '<div class="invitado-nombre">'+
+        esc(i.nombre)+
+      '</div>'+
+
+      '<div class="invitado-dato">'+
+        '<strong>👤 Cantidad</strong>'+
+        paseTexto(i)+
+      '</div>'+
+
+      '<div class="invitado-dato">'+
+        '<strong>🔗 Enlace personalizado</strong>'+
+        '<span class="enlace-personalizado">'+
+          esc(url(i))+
+        '</span>'+
+      '</div>'+
+
+      '<div class="mensaje-label">'+
+        '💬 Mensaje para WhatsApp'+
+      '</div>'+
+
+      '<textarea id="mensaje-'+
+        i.id+
+        '" class="msg-mobile" readonly>'+
+        esc(mensaje(i))+
+      '</textarea>'+
+
+      '<div class="botones-mobile">'+
+
+        '<button class="btn-abrir" onclick="abrir('+i.id+')">'+
+          '🔗 Abrir invitación'+
+        '</button>'+
+
+        '<button class="btn-copiar" onclick="copiar('+i.id+')">'+
+          '📋 Copiar enlace'+
+        '</button>'+
+
+        '<button class="btn-whatsapp" onclick="wa('+i.id+')">'+
+          '💬 Enviar por WhatsApp'+
+        '</button>'+
+
+        '<button class="btn-copiar-mensaje" onclick="copiarMensaje('+i.id+')">'+
+          '📋 Copiar mensaje'+
+        '</button>'+
+
+      '</div>';
+
+    cards.appendChild(card);
+
+  });
+
+
+  actualizarTotal();
+
 }
-function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
-async function copiar(id){const i=invitados.find(x=>x.id==id);await navigator.clipboard.writeText(url(i));alert('Enlace copiado.');}
-function wa(id){const i=invitados.find(x=>x.id==id);location.href='https://wa.me/?text='+encodeURIComponent(mensaje(i));}
+
+
+function esc(s){
+
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+
+}
+
+
+async function copiar(id){
+
+  const i=
+    invitados.find(x=>x.id==id);
+
+  if(!i)return;
+
+  try{
+
+    await navigator.clipboard.writeText(
+      url(i)
+    );
+
+    alert('✅ Enlace copiado.');
+
+  }catch(e){
+
+    alert('No se pudo copiar automáticamente. Puedes copiar el enlace manualmente.');
+
+  }
+
+}
+
+
+async function copiarMensaje(id){
+
+  const i=
+    invitados.find(x=>x.id==id);
+
+  if(!i)return;
+
+  try{
+
+    await navigator.clipboard.writeText(
+      mensaje(i)
+    );
+
+    alert('✅ Mensaje de WhatsApp copiado.');
+
+  }catch(e){
+
+    const textarea=
+      document.getElementById(
+        'mensaje-'+id
+      );
+
+    if(textarea){
+
+      textarea.select();
+      document.execCommand('copy');
+
+      alert('✅ Mensaje copiado.');
+
+    }
+
+  }
+
+}
+
+
+function abrir(id){
+
+  const i=
+    invitados.find(x=>x.id==id);
+
+  if(!i)return;
+
+  window.open(
+    url(i),
+    '_blank'
+  );
+
+}
+
+
+function wa(id){
+
+  const i=
+    invitados.find(x=>x.id==id);
+
+  if(!i)return;
+
+  location.href=
+    'https://wa.me/?text='+
+    encodeURIComponent(
+      mensaje(i)
+    );
+
+}
+
+
 function importarExcel(){
- const f=document.getElementById('excel').files[0]; if(!f){alert('Selecciona un archivo Excel.');return;}
- const rd=new FileReader(); rd.onload=e=>{try{const wb=XLSX.read(e.target.result,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];const a=XLSX.utils.sheet_to_json(ws,{defval:''});
- invitados=a.map((r,idx)=>({id:Number(r['No.'])||idx+1,nombre:String(r['Nombre']||'').trim(),personas:Number(r['Cantidad'])||0}));
- guardar();render();alert('Excel importado: '+invitados.length+' invitados.');}catch(err){alert('No se pudo leer el Excel: '+err.message)}};rd.readAsArrayBuffer(f);
+
+  const f=
+    document
+    .getElementById('excel')
+    .files[0];
+
+  if(!f){
+
+    alert(
+      'Selecciona un archivo Excel.'
+    );
+
+    return;
+
+  }
+
+
+  const rd=
+    new FileReader();
+
+
+  rd.onload=e=>{
+
+    try{
+
+      const wb=
+        XLSX.read(
+          e.target.result,
+          {type:'array'}
+        );
+
+      const ws=
+        wb.Sheets[
+          wb.SheetNames[0]
+        ];
+
+      const a=
+        XLSX.utils.sheet_to_json(
+          ws,
+          {defval:''}
+        );
+
+
+      invitados=
+        a.map(
+          (r,idx)=>({
+
+            id:
+              Number(r['No.'])||
+              idx+1,
+
+            nombre:
+              String(
+                r['Nombre']||
+                ''
+              ).trim(),
+
+            personas:
+              Number(
+                r['Cantidad']
+              )||0
+
+          })
+        );
+
+
+      guardar();
+      render();
+
+
+      alert(
+        'Excel importado: '+
+        invitados.length+
+        ' invitados.'
+      );
+
+
+    }catch(err){
+
+      alert(
+        'No se pudo leer el Excel: '+
+        err.message
+      );
+
+    }
+
+  };
+
+
+  rd.readAsArrayBuffer(f);
+
 }
-function descargarJSON(){const b=new Blob([JSON.stringify(invitados,null,2)],{type:'application/json'});descargar(b,'invitados.json');}
-function descargarXLSX(){const a=invitados.map(i=>({'No.':i.id,'Nombre':i.nombre,'Cantidad':i.personas,'Pase':Number(i.personas)>0?(Number(i.personas)==1?'1 Persona':i.personas+' Personas'):'','Enlace':url(i),'Mensaje WhatsApp':mensaje(i)}));const ws=XLSX.utils.json_to_sheet(a);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Invitados');XLSX.writeFile(wb,'Listado_Invitados_Enlaces.xlsx');}
-function descargar(b,n){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
-function limpiar(){if(confirm('¿Borrar la lista guardada de este navegador?')){localStorage.removeItem(KEY);location.reload();}}
-cargarGuardada();render();
+
+
+function descargarJSON(){
+
+  const b=
+    new Blob(
+      [
+        JSON.stringify(
+          invitados,
+          null,
+          2
+        )
+      ],
+      {
+        type:
+          'application/json'
+      }
+    );
+
+  descargar(
+    b,
+    'invitados.json'
+  );
+
+}
+
+
+function descargarXLSX(){
+
+  const a=
+    invitados.map(i=>({
+
+      'No.':
+        i.id,
+
+      'Nombre':
+        i.nombre,
+
+      'Cantidad':
+        i.personas,
+
+      'Pase':
+        paseTexto(i),
+
+      'Enlace':
+        url(i),
+
+      'Mensaje WhatsApp':
+        mensaje(i)
+
+    }));
+
+
+  const ws=
+    XLSX.utils.json_to_sheet(a);
+
+
+  const wb=
+    XLSX.utils.book_new();
+
+
+  XLSX.utils.book_append_sheet(
+    wb,
+    ws,
+    'Invitados'
+  );
+
+
+  XLSX.writeFile(
+    wb,
+    'Listado_Invitados_Enlaces.xlsx'
+  );
+
+}
+
+
+function descargar(b,n){
+
+  const a=
+    document.createElement('a');
+
+  a.href=
+    URL.createObjectURL(b);
+
+  a.download=n;
+
+  a.click();
+
+  setTimeout(
+    ()=>{
+      URL.revokeObjectURL(
+        a.href
+      );
+    },
+    1000
+  );
+
+}
+
+
+function limpiar(){
+
+  if(
+    confirm(
+      '¿Borrar la lista guardada de este navegador?'
+    )
+  ){
+
+    localStorage.removeItem(KEY);
+
+    location.reload();
+
+  }
+
+}
+
+
+cargarGuardada();
+render();
+
 </script>
-</body></html>
+
+</body>
+</html>
