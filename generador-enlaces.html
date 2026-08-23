@@ -6,17 +6,46 @@
 <title>Generador de Enlaces | Alejandro & Katherin</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
-body{font-family:Arial,sans-serif;background:#f5f2eb;margin:0;color:#333}
-.wrap{max-width:1200px;margin:30px auto;padding:0 18px}
+:root{--verde:#315442;--dorado:#aa8a4e;--fondo:#f5f2eb}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:var(--fondo);color:#333;line-height:1.45}
+.wrap{width:min(1200px,100%);margin:0 auto;padding:24px 16px}
 .card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 8px 30px #0001;margin-bottom:20px}
-h1{margin:0 0 8px;color:#315442} h2{color:#315442}
-input[type=file],input[type=text]{padding:12px;border:1px solid #ddd;border-radius:10px}
-button{border:0;border-radius:10px;padding:11px 15px;margin:4px;cursor:pointer;background:#315442;color:white}
-button.alt{background:#aa8a4e} button.danger{background:#a33}
-.status{padding:12px;border-radius:10px;background:#eef7ef;margin:12px 0}
-table{width:100%;border-collapse:collapse;background:white}th,td{padding:10px;border-bottom:1px solid #eee;text-align:left}th{background:#315442;color:white}
-a{color:#315442} .msg{min-width:280px;height:80px}
-@media(max-width:700px){table{font-size:12px} .wrap{padding:8px}}
+h1{margin:0 0 8px;color:var(--verde);font-size:clamp(24px,4vw,34px)}
+h2{color:var(--verde)}
+p{overflow-wrap:anywhere}
+input[type=file],input[type=text]{width:100%;max-width:520px;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px;background:#fff}
+button{border:0;border-radius:10px;padding:11px 15px;margin:4px;cursor:pointer;background:var(--verde);color:white;font-size:14px;transition:.2s}
+button:hover{opacity:.9;transform:translateY(-1px)}
+button.alt{background:var(--dorado)}
+button.danger{background:#a33}
+.status{padding:12px;border-radius:10px;background:#eef7ef;margin:12px 0;overflow-wrap:anywhere}
+.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.search{margin:0 0 15px}
+.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+table{width:100%;min-width:1050px;border-collapse:collapse;background:white}
+th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;vertical-align:top}
+th{background:var(--verde);color:white;position:sticky;top:0;z-index:1}
+td a{color:var(--verde);font-weight:600;overflow-wrap:anywhere}
+.msg{width:300px;min-width:260px;height:110px;resize:vertical;padding:8px;border:1px solid #ddd;border-radius:8px}
+.small-note{font-size:13px;color:#666}
+@media(max-width:768px){
+ .wrap{padding:14px 10px}
+ .card{padding:16px;border-radius:14px}
+ .actions{display:grid;grid-template-columns:1fr 1fr}
+ .actions button{width:100%;margin:0}
+ .search{margin-bottom:12px}
+ .status{font-size:14px}
+}
+@media(max-width:480px){
+ .wrap{padding:10px 7px}
+ .card{padding:13px}
+ .actions{grid-template-columns:1fr}
+ button{font-size:14px;padding:12px}
+ input[type=file],input[type=text]{max-width:none}
+ table{min-width:980px}
+}
 </style>
 </head>
 <body>
@@ -35,7 +64,7 @@ a{color:#315442} .msg{min-width:280px;height:80px}
 </div>
 <div class="card">
 <input id="buscar" type="text" placeholder="🔎 Buscar invitado..." oninput="render()">
-<div style="overflow:auto;margin-top:15px"><table><thead><tr>
+<div class="table-wrap" style="margin-top:15px"><table><thead><tr>
 <th>No.</th><th>Invitado</th><th>Cantidad</th><th>Enlace</th><th>Acciones</th><th>Mensaje WhatsApp</th>
 </tr></thead><tbody id="tabla"></tbody></table></div>
 </div>
