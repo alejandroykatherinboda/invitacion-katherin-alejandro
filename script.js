@@ -108,10 +108,16 @@ async function cargarInvitado() {
         mostramos información general.
     */
 
+    const paseElemento = cantidadElemento.closest(".pases");
+
     if (!idInvitado) {
 
         nombreElemento.textContent =
             "Invitado Especial";
+
+        if (paseElemento) {
+            paseElemento.style.display = "";
+        }
 
         cantidadElemento.textContent =
             "2 Personas";
@@ -120,11 +126,17 @@ async function cargarInvitado() {
 
     }
 
+    // Ocultamos el pase mientras cargamos el invitado para evitar
+    // que aparezca temporalmente el texto predeterminado.
+    if (paseElemento) {
+        paseElemento.style.display = "none";
+    }
+
 
     try {
 
         const respuesta =
-            await fetch("database/invitados.json", {
+            await fetch(`database/invitados.json?v=${Date.now()}`, {
                 cache: "no-store"
             });
 
@@ -159,8 +171,11 @@ async function cargarInvitado() {
             nombreElemento.textContent =
                 "Invitado Especial";
 
-            cantidadElemento.textContent =
-                "2 Personas";
+            if (paseElemento) {
+                paseElemento.style.display = "none";
+            } else {
+                cantidadElemento.textContent = "";
+            }
 
             console.warn(
                 "No se encontró el invitado:",
@@ -187,7 +202,6 @@ async function cargarInvitado() {
         const cantidad = Number(invitado.personas);
 
         // Si la cantidad es 0, ocultamos completamente "Pase para".
-        const paseElemento = cantidadElemento.closest(".pases");
 
         if (!Number.isFinite(cantidad) || cantidad <= 0) {
             if (paseElemento) {
