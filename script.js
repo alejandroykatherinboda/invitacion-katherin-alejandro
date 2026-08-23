@@ -184,20 +184,28 @@ async function cargarInvitado() {
             CANTIDAD DE PERSONAS
         */
 
-        const cantidad =
-            Number(invitado.personas) || 1;
+        const cantidad = Number(invitado.personas);
 
+        // Si la cantidad es 0, ocultamos completamente "Pase para".
+        const paseElemento = cantidadElemento.closest(".pases");
+
+        if (!Number.isFinite(cantidad) || cantidad <= 0) {
+            if (paseElemento) {
+                paseElemento.style.display = "none";
+            } else {
+                cantidadElemento.textContent = "";
+            }
+            return;
+        }
+
+        if (paseElemento) {
+            paseElemento.style.display = "";
+        }
 
         if (cantidad === 1) {
-
-            cantidadElemento.textContent =
-                "1 Persona";
-
+            cantidadElemento.textContent = "1 Persona";
         } else {
-
-            cantidadElemento.textContent =
-                `${cantidad} Personas`;
-
+            cantidadElemento.textContent = `${cantidad} Personas`;
         }
 
 

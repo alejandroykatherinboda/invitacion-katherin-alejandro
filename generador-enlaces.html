@@ -170,7 +170,7 @@ function render(){
 
   tbody.innerHTML=filtrados.map(inv=>{
     const url=enlace(inv);
-    const pase=inv.personas===1 ? "1 Persona" : inv.personas+" Personas";
+    const pase=inv.personas<=0 ? "—" : (inv.personas===1 ? "1 Persona" : inv.personas+" Personas");
     const mensaje="Hola, Alejandro y Katherin. 💍❤️\\n\\nTe compartimos tu invitación personalizada:\\n"+url+"\\n\\n¡Esperamos verte en nuestro gran día!";
 
     return `<tr>
