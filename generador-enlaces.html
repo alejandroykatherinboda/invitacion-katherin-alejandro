@@ -40,7 +40,7 @@ th{background:#f0f0f0}
 
 <div class="info">
 <strong>Importante:</strong> puedes importar nuevamente tu archivo Excel cada vez que cambies nombres o cantidades.
-El generador actualiza la tabla y te permite descargar el nuevo <code>invitados.json</code>.
+El generador actualiza la tabla y te permite descargar el nuevo <code>invitados.json</code> y un Excel con todos los enlaces personalizados listos para enviar.
 Después debes reemplazar <code>database/invitados.json</code> en GitHub Pages.
 </div>
 
@@ -54,6 +54,7 @@ Después debes reemplazar <code>database/invitados.json</code> en GitHub Pages.
 <button class="primary" id="importBtn">📥 Importar / actualizar Excel</button>
 <button class="gold" id="downloadJsonBtn">💾 Descargar invitados.json</button>
 <button class="dark" id="downloadCsvBtn">📄 Descargar enlaces CSV</button>
+<button class="gold" id="downloadXlsxBtn">📊 Descargar listado XLSX</button>
 <button class="light" id="clearBtn">Limpiar lista guardada</button>
 </div>
 <div id="status" class="status"></div>
@@ -171,7 +172,7 @@ function render(){
   tbody.innerHTML=filtrados.map(inv=>{
     const url=enlace(inv);
     const pase=inv.personas<=0 ? "—" : (inv.personas===1 ? "1 Persona" : inv.personas+" Personas");
-    const mensaje="Hola, Alejandro y Katherin. 💍❤️\\n\\nTe compartimos tu invitación personalizada:\\n"+url+"\\n\\n¡Esperamos verte en nuestro gran día!";
+    const mensaje=`¡Hola, ${inv.nombre}! 😊💍\n\nCon mucho cariño, Alejandro y Katherin queremos compartir contigo nuestra invitación de boda. ❤️\n\nAquí tienes tu invitación personalizada:\n${url}\n\nSerá un honor contar con tu presencia en este día tan especial. ✨\n\n¡Te esperamos! 🥂❤️`;
 
     return `<tr>
       <td>${escapeHtml(inv.id)}</td>
@@ -253,6 +254,29 @@ $("downloadCsvBtn").addEventListener("click",()=>{
   invitados.forEach(x=>rows.push([x.id,x.nombre,x.personas,enlace(x)]));
   const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\\r\\n");
   descargar("enlaces_invitados.csv","\\uFEFF"+csv,"text/csv;charset=utf-8");
+});
+
+
+
+$("downloadXlsxBtn").addEventListener("click",()=>{
+  if(!invitados.length){mostrarStatus("Primero importa el Excel.",true);return;}
+  const filas=[["No.","Invitado","Cantidad","Pase","Enlace personalizado","Mensaje para enviar"]];
+  invitados.forEach(x=>{
+    const url=enlace(x);
+    const pase=x.personas<=0 ? "" : (x.personas===1 ? "1 Persona" : x.personas+" Personas");
+    const mensaje=`¡Hola, ${x.nombre}! 😊💍\n\nCon mucho cariño, Alejandro y Katherin queremos compartir contigo nuestra invitación de boda. ❤️\n\nAquí tienes tu invitación personalizada:\n${url}\n\nSerá un honor contar con tu presencia en este día tan especial. ✨\n\n¡Te esperamos! 🥂❤️`;
+    filas.push([x.id,x.nombre,x.personas,pase,url,mensaje]);
+  });
+  const ws=XLSX.utils.aoa_to_sheet(filas);
+  ws["!cols"]=[{wch:8},{wch:32},{wch:12},{wch:16},{wch:65},{wch:80}];
+  for(let r=2;r<=filas.length;r++){
+    const celda=ws["E"+r];
+    if(celda) celda.l={Target:celda.v,Tooltip:"Abrir invitación personalizada"};
+  }
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,"Listado de invitados");
+  XLSX.writeFile(wb,"listado_invitados_con_enlaces.xlsx");
+  mostrarStatus("Se descargó el listado XLSX con enlaces personalizados y mensajes listos para enviar.");
 });
 
 $("clearBtn").addEventListener("click",()=>{
