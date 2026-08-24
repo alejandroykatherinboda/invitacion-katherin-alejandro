@@ -660,9 +660,13 @@ function actualizarTotal(){
 
 function url(i){
 
-  return BASE+
-    '?invitado='+
-    encodeURIComponent(i.id);
+  const parametros=new URLSearchParams({
+    invitado:String(i.id),
+    nombre:i.nombre||'',
+    personas:String(Number(i.personas)||0)
+  });
+
+  return BASE+'?'+parametros.toString();
 
 }
 

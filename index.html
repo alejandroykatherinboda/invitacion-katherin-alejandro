@@ -1797,6 +1797,70 @@
     <script src="script.js"></script>
     <script src="js/invitados.js"></script>
 
+    <!-- DATOS PERSONALIZADOS DEL INVITADO -->
+    <script>
+        (function () {
+            async function mostrarInvitado() {
+                const parametros = new URLSearchParams(window.location.search);
+                const id = parametros.get('invitado');
+                let nombre = parametros.get('nombre');
+                let personas = parametros.get('personas');
+
+                /* Compatibilidad con enlaces anteriores que solamente llevan el ID */
+                if ((!nombre || personas === null) && id) {
+                    let lista = [];
+
+                    if (typeof invitados !== 'undefined' && Array.isArray(invitados)) {
+                        lista = invitados;
+                    } else if (typeof listaInvitados !== 'undefined' && Array.isArray(listaInvitados)) {
+                        lista = listaInvitados;
+                    }
+
+                    /* Carga la lista publicada en la raíz del sitio */
+                    if (!lista.length) {
+                        try {
+                            const respuesta = await fetch('invitados.json', { cache: 'no-store' });
+
+                            if (respuesta.ok) {
+                                lista = await respuesta.json();
+                            }
+                        } catch (error) {
+                            console.error('No se pudo cargar invitados.json', error);
+                        }
+                    }
+
+                    const encontrado = lista.find(function (item) {
+                        return String(item.id) === String(id);
+                    });
+
+                    if (encontrado) {
+                        nombre = nombre || encontrado.nombre;
+                        personas = personas === null ? encontrado.personas : personas;
+                    }
+                }
+
+                const elementoNombre = document.getElementById('nombreInvitado');
+                const elementoCantidad = document.getElementById('cantidadInvitados');
+
+                if (elementoNombre && nombre) {
+                    elementoNombre.textContent = nombre;
+                }
+
+                if (elementoCantidad && personas !== null && personas !== '') {
+                    const cantidad = Number(personas);
+
+                    if (Number.isFinite(cantidad)) {
+                        elementoCantidad.textContent = cantidad === 1
+                            ? '1 Persona'
+                            : cantidad + ' Personas';
+                    }
+                }
+            }
+
+            mostrarInvitado();
+        })();
+    </script>
+
 
 </body>
 

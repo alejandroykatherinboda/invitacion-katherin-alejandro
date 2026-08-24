@@ -1,0 +1,12 @@
+REEMPLAZAR EN LA RAÍZ DEL REPOSITORIO:
+
+1. Subir index.html y confirmar "Replace" si GitHub lo solicita.
+2. Subir invitados.json en el mismo nivel que index.html.
+3. Los nombres deben quedar exactamente así, sin (2), (5), espacios ni .txt:
+   - index.html
+   - invitados.json
+4. Confirmar los cambios (Commit changes).
+5. Esperar 1 o 2 minutos y actualizar la página con Ctrl + F5.
+
+Prueba:
+?invitado=2
