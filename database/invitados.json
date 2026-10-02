@@ -124,7 +124,7 @@
   {"id": 123, "nombre": "YOLANDA RIVAS", "cantidad": 2},
   {"id": 124, "nombre": "NESTOR RIVAS", "cantidad": 2},
   {"id": 125, "nombre": "ISABEL RIVAS", "cantidad": 1},
-  {"id": 126, "nombre": "ARNULFO VALLADARES Y FAMILIA", "cantidad": 2},
+  {"id": 126, "nombre": "ARNULFO VALLADARES Y ESPOSA", "cantidad": 2},
   {"id": 127, "nombre": "MAURO ERNESTO VALLADARES Y ESPOSA", "cantidad": 2},
   {"id": 128, "nombre": "MIRIAN GODOY", "cantidad": 1},
   {"id": 129, "nombre": "PADRE JOSÉ LUIS MERCADO ESCOBAR", "cantidad": 3},
@@ -159,5 +159,9 @@
   {"id": 158, "nombre": "ANGEL GONZALEZ Y ESPOSA", "cantidad": 2},
   {"id": 159, "nombre": "ANDY ZERON Y FAMILIA", "cantidad": 3},
   {"id": 160, "nombre": "MERLIN VIDEA Y ESPOSA", "cantidad": 2},
-  {"id": 161, "nombre": "MERLIN MARADIAGA", "cantidad": 1}
+  {"id": 161, "nombre": "MERLIN MARADIAGA", "cantidad": 1},
+  {"id": 161, "nombre": "MERLIN MARADIAGA", "cantidad": 1},
+  {"id": 162, "nombre": "NERY LUQUE Y ESPOSA", "cantidad": 2},
+  {"id": 163, "nombre": "ANTONIO AMAYA Y PADRE AMAYA", "cantidad": 2},
+  {"id": 164, "nombre": "DOMINGO MONTOYA Y ESPOSA", "cantidad": 2}
 ]
